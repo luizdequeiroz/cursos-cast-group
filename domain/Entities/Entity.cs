@@ -1,0 +1,17 @@
+﻿using domain.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace domain.Entities
+{
+    public class Entity
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [NotSetAutomatically]
+        public int Id { get; set; }
+        public DateTime RegisterDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+    }
+}
