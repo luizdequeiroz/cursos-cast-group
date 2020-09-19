@@ -2,7 +2,6 @@
 using domain.Enums;
 using repository;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace service.Implementations

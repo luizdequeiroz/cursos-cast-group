@@ -28,6 +28,9 @@ namespace app.Controllers
             if (cursoCreated.code == Code.INVALID_DATE_RANGE)
                 return BadRequest(new { cursoCreated.code, message = "Data de início do curso não pode ser superior à data final." });
 
+            if (cursoCreated.code == Code.INVALID_START_DATE)
+                return BadRequest(new { cursoCreated.code, message = "Data de início do curso não pode ser inferior à data atual." });
+
             return Created("", cursoCreated.result);
         }
 
@@ -70,6 +73,9 @@ namespace app.Controllers
 
             if (cursoUpdated.code == Code.INVALID_DATE_RANGE)
                 return BadRequest(new { cursoUpdated.code, message = "Data de início do curso não pode ser superior à data final." });
+
+            if (cursoUpdated.code == Code.INVALID_START_DATE)
+                return BadRequest(new { cursoUpdated.code, message = "Data de início do curso não pode ser inferior à data atual." });
 
             return Ok(cursoUpdated.result);
         }
