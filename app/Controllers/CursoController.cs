@@ -22,8 +22,11 @@ namespace app.Controllers
         {
             var cursoCreated = await cursoService.SetNewAsync(curso);
 
-            if (cursoCreated.code != Code.SUCCESS)
-                return BadRequest(cursoCreated);
+            if (cursoCreated.code == Code.BUSY_PERIOD)
+                return BadRequest(new { cursoCreated.code, message = "Existe(m) curso(s) planejados(s) dentro do período informado." });
+
+            if (cursoCreated.code == Code.INVALID_DATE_RANGE)
+                return BadRequest(new { cursoCreated.code, message = "Data de início do curso não pode ser superior à data final." });
 
             return Created("", cursoCreated.result);
         }
@@ -59,8 +62,14 @@ namespace app.Controllers
             curso.Id = id;
             var cursoUpdated = await cursoService.AlterAsync(curso);
 
+            if (cursoUpdated.code == Code.BUSY_PERIOD)
+                return BadRequest(new { cursoUpdated.code, message = "Existe(m) curso(s) planejados(s) dentro do período informado." });
+
             if (cursoUpdated.code == Code.ITEM_DOES_NOT_EXIST)
                 return BadRequest(new { cursoUpdated.code, message = "Não foi possível realizar a atualização do curso, pois ele não existe." });
+
+            if (cursoUpdated.code == Code.INVALID_DATE_RANGE)
+                return BadRequest(new { cursoUpdated.code, message = "Data de início do curso não pode ser superior à data final." });
 
             return Ok(cursoUpdated.result);
         }
