@@ -9,6 +9,7 @@
         ITENS_NOT_FOUND = -4,
         INVALID_INPUTS = -5,
         BUSY_PERIOD = -6,
-        INVALID_DATE_RANGE = -7
+        INVALID_DATE_RANGE = -7,
+        INVALID_START_DATE = -8
     }
 }

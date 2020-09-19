@@ -1,6 +1,7 @@
 ﻿using domain.Entities;
 using domain.Enums;
 using repository;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +23,9 @@ namespace service.Implementations
             if (entity.DataInicio > entity.DataTermino)
                 return (Code.INVALID_DATE_RANGE, null);
 
+            if (entity.DataInicio < DateTime.Now)
+                return (Code.INVALID_START_DATE, null);
+
             return await base.SetNewAsync(entity);
         }
 
@@ -34,6 +38,9 @@ namespace service.Implementations
 
             if (entity.DataInicio > entity.DataTermino)
                 return (Code.INVALID_DATE_RANGE, null);
+
+            if (entity.DataInicio < DateTime.Now)
+                return (Code.INVALID_START_DATE, null);
 
             return await base.AlterAsync(entity);
         }

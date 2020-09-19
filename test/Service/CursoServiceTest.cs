@@ -86,5 +86,37 @@ namespace test.Service
 
             Assert.Equal(Code.INVALID_DATE_RANGE, cursoAltered.code);
         }
+
+        [Fact]
+        public async Task SetNew_QuandoPassarDataInicioMenorQueADataAtual_DeveRetornarCodigoDeErroAsync()
+        {
+            var curso = new Curso
+            {
+                Assunto = "CSharp",
+                DataInicio = new DateTime(2020, 09, 18),
+                DataTermino = new DateTime(2020, 12, 30),
+                QuantidadeAlunos = 10,
+                CodigoCategoria = 2
+            };
+
+            var cursoInserted = await cursoService.SetNewAsync(curso);
+
+            Assert.Equal(Code.INVALID_START_DATE, cursoInserted.code);
+        }
+
+        [Fact]
+        public async Task Alter_QuandoPassarDataInicioMenorQueADataAtual_DeveRetornarCodigoDeErroAsync()
+        {
+            var curso = new Curso
+            {
+                Id = 2,
+                DataInicio = new DateTime(2020, 09, 18),
+                DataTermino = new DateTime(2020, 12, 30),
+            };
+
+            var cursoAltered = await cursoService.AlterAsync(curso);
+
+            Assert.Equal(Code.INVALID_START_DATE, cursoAltered.code);
+        }
     }
 }
