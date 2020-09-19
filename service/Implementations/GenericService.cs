@@ -88,6 +88,10 @@ namespace service.Implementations
         public virtual async Task<(Code code, E result)> GetByIdAsync(int id)
         {
             E result = await repository.SelectByIdAsync(id);
+
+            if (result == null)
+                return (Code.ITEM_DOES_NOT_EXIST, null);
+
             return (Code.SUCCESS, result);
         }
 
