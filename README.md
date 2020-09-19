@@ -1,6 +1,6 @@
 # cursos-cast-group
 
-# Usei arquitetura DDD
+# Usei uma arquitetura baseada em princípios DDD
 
 Na qual tem-se 
 - domain: onde está dbContext, entidades, attributes, enums etc
